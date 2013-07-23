@@ -1,0 +1,44 @@
+
+  jelastic-git - Deploy a git binary tar-ball (tar.gz) to elastx nexus server. 
+
+
+DESCRIPTION
+  jelastic-git version manages a git binary tar-ball (src/main/resources/archive.tar.gz)
+  to be used in on jelastic VDS hosts. 
+
+  The git binary tar ball as of now has been built in VDS environment gungus-alm1:CentOS. 
+
+
+BUILD DISTRIBUTIONS
+
+  STEPS
+  1. Prepare a new git binary from source.
+  2. Update the jelastic-git project on build server. 
+  3. Release jelastic-git project on any machine to elastx Nexus.
+  
+  BUILD SERVER
+  The build server should be a VDS to ensure the same CentOS version that the git binary
+  will work on any other jelastic host. 
+
+  On the current build server (gungus-alm1:CentOS) all builds are available at /build. 
+  * /build/jelastic-git - elastx maven based git distribution project (https://github.com/elastx/jelastic-git). 
+  * /build/git-source: downloaded source distributions from http://code.google.com/p/git-core/downloads/list
+  
+  BUILDING 
+  1. Prepare a new git binary from source.  
+  Download your new git version to build server and unpack it under /build/git-source. 
+  Build it using --prefix=<your-uppack-directory>/dist (see your git source dist file INSTALL) for details.
+
+  2. Update the jelastic-git project on build server. 
+  Create a tar.gz containing only git and copy that to /build/jelastic-git/src/main/resources/archive.tar.gz. 
+  Git commit the archive. 
+  Git push origin.  
+  
+  3. Release jelastic-git project on any machine to elastx Nexus.
+  On any machine, do a git pull of jelastic-git and make a maven release. 
+
+  
+
+  
+ 
+  
